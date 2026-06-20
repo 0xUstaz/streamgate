@@ -24,16 +24,18 @@ CIRCLE_GATEWAY_URL     = os.getenv(
     "CIRCLE_GATEWAY_URL",
     "https://api.circle.com/v1/w3s"          # base; nanopayments endpoint appended in payment.py
 )
-ARC_TESTNET_CHAIN_ID   = int(os.getenv("ARC_TESTNET_CHAIN_ID", "1516"))  # Arc testnet chain ID
+ARC_TESTNET_CHAIN_ID   = int(os.getenv("ARC_TESTNET_CHAIN_ID", "5042002"))  # Arc testnet chain ID (confirmed via cast chain-id)
 ARC_RPC_URL            = os.getenv(
     "ARC_RPC_URL",
-    "https://rpc.arc-testnet.canteen.dev"     # Canteen-hosted Arc testnet RPC
+    "https://rpc.testnet.arc-node.thecanteenapp.com/v1/swrm_84576b873e27e1942bbb9f65101fb64be15a733f55bbd7137f2df7660a9aa1a9"
 )
 
-# Gateway Wallet contract address on Arc testnet (where viewers deposit USDC)
+# USDC contract address on Arc testnet
+# Source: https://docs.arc.io/arc/references/contract-addresses
+# USDC is also the native gas token on Arc (dual interface: native + ERC-20)
 GATEWAY_WALLET_CONTRACT = os.getenv(
     "GATEWAY_WALLET_CONTRACT",
-    ""  # fill in after checking arc-nanopayments reference
+    "0x3600000000000000000000000000000000000000"  # confirmed USDC on Arc testnet
 )
 
 # ── Owncast webhook security ──────────────────────────────────────────────────
@@ -58,4 +60,3 @@ def validate():
         print(f"⚠️  WARNING: Missing required env vars: {', '.join(missing)}")
         print("   Copy .env.example to .env and fill in the values.")
     return len(missing) == 0
-

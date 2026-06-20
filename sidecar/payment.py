@@ -15,10 +15,8 @@ Circle batches many of these and settles in bulk later.
 import logging
 import time
 import httpx
-from web3 import Web3
 from eth_account import Account
-from eth_account.messages import encode_defunct
-from eth_account.structured_data.hashing import hash_domain, hash_message
+from eth_account.signers.local import LocalAccount
 import json
 
 import config
